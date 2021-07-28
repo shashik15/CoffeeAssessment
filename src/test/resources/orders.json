@@ -1,0 +1,7 @@
+[
+  { "user": "sam", "drink": "long black", "size": "medium" },
+  { "user": "sam", "drink": "mocha", "size": "medium" },
+  { "user": "sarah", "drink": "long black", "size": "small" },
+  { "user": "ellis", "drink": "supermochacrapucaramelcream", "size": "ultra" },
+  { "user": "nick", "drink": "supermochacrapucaramelcream", "size": "huge" }
+]
