@@ -11,9 +11,9 @@ The assessment comes with 3 JSON files. The files contain data for products, ord
 
 ## Rest Api :
 - Return User payment details including details :
-    Username
-    amount paid per user
-    Amount that each users still owes.
+    - Username
+    - amount paid per user
+    - Amount that each users still owes.
     
 ## Technology Stack Used :
   - Java 8
