@@ -32,7 +32,7 @@ public class CoffeeAssessmentService {
         usersKeySet.addAll(userPaymentDetails.keySet());
 
         for (String user: usersKeySet ) {
-            double amountTobePaid =0 ,amountPaid =0 ,amountDue=0;
+            double amountTobePaid =-1 ,amountPaid =-1 ,amountDue= -1;
 
             if(userPaymentDetails.containsKey(user)) {
                 amountPaid = userPaymentDetails.get(user);
@@ -42,7 +42,6 @@ public class CoffeeAssessmentService {
                 amountDue = amountTobePaid - amountPaid;
             }else{
                 log.info("No orders, but Payment done by User : " + user + " - No Due Amount");
-                amountDue = 0;
             }
 
             PaymentDue paymentDue = new PaymentDue(user, amountPaid, amountDue);
