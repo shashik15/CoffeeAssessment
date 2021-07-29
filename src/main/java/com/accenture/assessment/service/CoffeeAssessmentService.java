@@ -32,7 +32,7 @@ public class CoffeeAssessmentService {
         usersKeySet.addAll(userPaymentDetails.keySet());
 
         for (String user: usersKeySet ) {
-            double amountTobePaid =-1 ,amountPaid =-1 ,amountDue= -1;
+            double amountTobePaid =0 ,amountPaid =0 ,amountDue= 0;
 
             if(userPaymentDetails.containsKey(user)) {
                 amountPaid = userPaymentDetails.get(user);
