@@ -3,8 +3,10 @@ package com.accenture.assessment.service;
 import com.accenture.assessment.model.PaymentDue;
 import com.accenture.assessment.utility.CoffeeAssessmentJsonReader;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import java.util.Map;
  *
  * Coffee Assessment Service class
  */
+@Slf4j
 @Service
 public class CoffeeAssessmentService {
 
@@ -25,11 +28,22 @@ public class CoffeeAssessmentService {
         Map<String, Double> userOrderDetails = CoffeeAssessmentJsonReader.getUserOrderDetails();
         Map<String, Double> userPaymentDetails = CoffeeAssessmentJsonReader.getUserPaymentDetails();
 
-        for (String user: userOrderDetails.keySet() ) {
+        HashSet<String> usersKeySet = new HashSet<String>(userOrderDetails.keySet());
+        usersKeySet.addAll(userPaymentDetails.keySet());
 
-            double amountTobePaid = userOrderDetails.get(user);
-            double amountPaid = userPaymentDetails.get(user);
-            double amountDue = amountTobePaid - amountPaid;
+        for (String user: usersKeySet ) {
+            double amountTobePaid =0 ,amountPaid =0 ,amountDue=0;
+
+            if(userPaymentDetails.containsKey(user)) {
+                amountPaid = userPaymentDetails.get(user);
+            }
+            if(userOrderDetails.containsKey(user)) {
+                amountTobePaid = userOrderDetails.get(user);
+                amountDue = amountTobePaid - amountPaid;
+            }else{
+                log.info("No orders, but Payment done by User : " + user + " - No Due Amount");
+                amountDue = 0;
+            }
 
             PaymentDue paymentDue = new PaymentDue(user, amountPaid, amountDue);
             paymentDueList.add(paymentDue);
